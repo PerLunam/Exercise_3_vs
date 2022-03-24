@@ -33,7 +33,7 @@ class Sorcerer : public NPC
     //Destruktor
     virtual ~Sorcerer()
     {
-        std::cout << this->getType() << " " << this->getName() << " verlässt das Abenteuer und ärgert andere Helden*Innen." << std::endl;
+        std::cout << this->getType() << " " << &this->getName() << " verlässt das Abenteuer und ärgert andere Helden*Innen." << std::endl;
     }
 
     //----------------------------- Objektfunktionen -----------------------------

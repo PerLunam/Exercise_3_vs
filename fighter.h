@@ -33,7 +33,7 @@ class Fighter : public NPC
     //Destruktor
     virtual ~Fighter()
     {
-        std::cout << this->getType() << " " << this->getName() << " verlässt das Abenteuer und ärgert andere Helden*Innen." << std::endl;
+        std::cout << this->getType() << " " << &this->getName() << " verlässt das Abenteuer und ärgert andere Helden*Innen." << std::endl;
     }
 
     //----------------------------- Objektfunktionen -----------------------------

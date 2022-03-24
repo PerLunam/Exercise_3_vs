@@ -32,8 +32,14 @@ class Character
 
     //Individueller Konstruktor
     Character(const std::string &name, int health, int gold, int armor, int mr)
-        : char_name(name), char_gold(gold), char_armor(armor), char_mr(mr)
+        : char_name(name), char_gold(gold), char_armor(armor), char_mr(mr)            
         {
+            //Initialisierung des Inventars mit dem Default-Konstruktor aka "Default-Item" und "false"
+            for(int i = 0; i < MAX_INVENTORY_SIZE; i++)
+            {
+                this->inventory[i] = Item();
+            }
+            
             std::cout << "Konstruktor: " << char_name << std::endl;
         }
     

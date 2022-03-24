@@ -7,6 +7,8 @@
 
 #define MAX_EQUIPMENT_SIZE 2
 
+class Character;
+
 class Hero : public Character
 {
     private:
@@ -29,6 +31,12 @@ class Hero : public Character
     Hero(const std::string &char_name, int char_health, int char_gold, int char_armor, int char_mr, enumType typ)
         : Character(char_name, char_health, char_gold, char_armor, char_mr), typ(typeHero)
             {
+                //Initialisierung der Ausrüstung mit dem Default-Konstruktor aka "Default-Item" und "false"
+                for(int i = 0; i < MAX_EQUIPMENT_SIZE; i++)
+                {
+                    this->hero_gear[i] = Item();
+                }
+                
                 std::cout << "Konstruktor: " << char_name << std::endl;
             }
 

@@ -51,19 +51,20 @@ Item Hero::removeEquipmentItem(int slot)
 void Hero::sellItem(int index)
 {
     //Pointer auf das Item am angegebenen Index
-    Item *test = this->getInventory(index);
+    Item *sellItem = this->getInventory(index);
 
     //Prüfung, ob das gewählte Item mit "true" initialisiert wurde
     //falls ja, wird der Wert auf "false" gesetzt
-    if(test->isIsValid())
+    if(sellItem->isIsValid())
     {
-        test->setIsValid(false);
+        sellItem->setIsValid(false);
+
         //Berechnung des neuen Guthabens
         //setGold/ neuer Wert = getGold/ alter Wert + Wert des Items
-        this->setGold(this->getGold() + test->getValue());
+        this->setGold(this->getGold() + sellItem->getValue());
     }
     //Ausgabe einer Bestätigung über das Terminal
-    std::cout << "Der Gegenstand " << test->getName() << " wurde für " << test->getValue() << " verkauft. " << this->getName() << " besitzt nun " << this->getGold() << " Gold." << std::endl;
+    std::cout << "Der Gegenstand " << sellItem->getName() << " wurde für " << sellItem->getValue() << " verkauft. " << this->getName() << " besitzt nun " << this->getGold() << " Gold." << std::endl;
 }
 
 enumType& Hero::getType()

@@ -1,16 +1,20 @@
-#include "character.h"
-
 #include <iostream>
+
+#include "character.h"
 
 //----------------------------- Objektfunktionen -----------------------------
 bool Character::fight(Character *enemy)
 {
     std::cout << enemy->getName() << " fordert " << this->getName() << " zu einem Kampf um Ruhm und Ehre heraus." << std::endl;
     
+    //Lösung mithilfe einer Do-While-Loop
+
+
+    
     if(this->getHealth() > 0 && enemy->getHealth() > 0)
     {
         this->attack(enemy);
-        
+
         if(enemy->getHealth() > 0)
         {
             enemy->attack(this);
@@ -27,7 +31,7 @@ int Character::addInventarItem(Item &item)
         {
             this->inventory[i].setName(item.getName());
             this->inventory[i].setValue(item.getValue());
-            //this->inventory[i].isValid(true);
+            //this->inventory[i].setIsValid(true);
             this->inventory[i].setIsValid(item.isIsValid());
 
             //Bei erfolgreicher Platzierung soll der Index des Items ausgegeben werden
@@ -55,13 +59,33 @@ Item Character::removeInventarItem(int slot)
 
 Item Character::retrieveRandomLoot(Character *enemy)
 {
-    //Zufällige Zahl wird generiert und dient als Kriterium für die Auswahl des entsprechenden Item-Slots
+    //Zufällige Zahl wird generiert und dient als Kriterium für die Auswahl des entsprechenden Item-Index
     int rndNumber = rand() % (MAX_INVENTORY_SIZE + 1);
 
-    if(this->inventory[rndNumber].isIsValid())
+    if(enemy->inventory[rndNumber].isIsValid())
     {
-        //TODO - Fehler beheben
-        this->addInventarItem(enemy->removeInventarItem(rndNumber));
+        //falls der Index korrekt initialisiert ist (isValid = "true"), soll das Item aus dem Inventar des Gegners entfernt ("removeInventarItem")
+        //und in das Inventar des Helden/ der Helding beigefügt werden ("addInventarItem")
+
+        //Erster Versuch der Umsetzung, aber mit Fehler
+        //this->addInventarItem(&enemy->removeInventarItem(rndNumber));
+
+        //Zweiter Versuch der Umsetzung
+        //Deklaration einer Variablen für das Item an Index "rndNumber"
+        Item lootItem = enemy->inventory[rndNumber];
+
+        //Item wird aus dem Inventar des Gegners entfernt
+        enemy->removeInventarItem(rndNumber);
+
+        //Das entsprechend Item wird dem Inventar des Helden/ der Heldin beigefügt
+        this->addInventarItem(lootItem);
+
+        return lootItem;
+    } else
+    {
+        //Falls alle Plätze belegt oder der Slot fehlerhaft initialisiert sein,
+        //wird der Default-Konstruktor verwendet und das Item "Default-Item" mit isValid "false" ausgegeben
+        return Item();
     }
 }
 

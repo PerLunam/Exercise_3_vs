@@ -4,8 +4,11 @@
 
 #include "character.h"
 #include "hero.h"
+#include "npc.h"
 #include "fighter.h"
 #include "sorcerer.h"
+#include "item.h"
+#include "type.h"
 
 int main(void)
 {
@@ -39,7 +42,7 @@ int main(void)
 
     if(annina.fight(&matthias))
     {
-        std::cout << matthias.getName() << " fiel in Ohnmacht! " << annina.getName() << " hat noch " << annina.getHealth() << " Lebenspunkte." << std::endl;
+        std::cout << matthias->getName() << " fiel in Ohnmacht! " << annina.getName() << " hat noch " << annina.getHealth() << " Lebenspunkte." << std::endl;
         annina.retrieveRandomLoot(&matthias);
         
         for(int i = 0; i < MAX_INVENTORY_SIZE; i++)
@@ -63,7 +66,7 @@ int main(void)
     if(annina.fight(&pascal))
     {
         std::cout << pascal.getName() << " fiel in Ohnmacht! " << annina.getName() << " hat noch " << annina.getHealth() << " Lebenspunkte." << std::endl;
-        annina.retrieveRandomLoot(&pascal);
+        annina.retrieveRandomLoot(pascal);
         
         for(int i = 0; i < MAX_INVENTORY_SIZE; i++)
         {

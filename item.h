@@ -18,7 +18,8 @@ class Item
     //Default
     Item() : item_name("Default-Item"), isValid(false)
     {
-        std::cout << "Konstruktor: " << item_name << std::endl;
+        std::cout << "Calling Item::Default-Constructor" << std::endl;
+        //std::cout << "Konstruktor: " << item_name << std::endl;
     }
 
     //Individueller Konstruktor
