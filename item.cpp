@@ -3,7 +3,6 @@
 const std::string &Item::getName() const
 {
     return this->item_name;
-    //return item_name;
 }
 
 void Item::setName(const std::string &newName)
@@ -31,8 +30,10 @@ void Item::setIsValid(bool newIsValid)
     this->isValid = newIsValid;
 }
 
+/*
 std::ostream& operator<<(std::ostream& out, const Item& i)
 {
     std::cout << i.getName() << " mit einem Wert von " << i.getValue() << std::endl;
     return out;
 }
+*/

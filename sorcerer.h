@@ -7,33 +7,36 @@
 
 class Sorcerer : public NPC
 {
-    private:
+private:
     int magicPower;
     enumType typ;
 
-    protected:
+protected:
 
-    public:
+public:
     //Konstruktoren der Class "Sorcerer"
     /*
     //Default
     Sorcerer() : char_name("Default-Sorcerer")
     {
-        std::cout << "Konstruktor: " << char_name << std::endl;
+        std::cout << "Sorcerer::Constructor: " << char_name << std::endl;
     }
     */
 
     //Individueller Konstruktor
-    Sorcerer(const std::string &char_name, int char_health, int char_gold, int char_armor, int char_mr, enumType typ, int magicPower)
-        : NPC(char_name, char_health, char_gold, char_armor, char_mr), magicPower(magicPower), typ(typeSorcerer)
-        {
-            std::cout << "Konstruktor: " << char_name << std::endl;
-        }
+    Sorcerer(const std::string &char_name, int char_health, int char_gold, int char_armor, int char_mr, int magicPower)
+            : NPC(char_name, char_health, char_gold, char_armor, char_mr), magicPower(magicPower), typ(typeSorcerer)
+    {
+        std::cout << "Sorcerer::Constructor: " << char_name << std::endl;
+    }
 
     //Destruktor
     virtual ~Sorcerer()
     {
-        std::cout << this->getType() << " " << &this->getName() << " verlässt das Abenteuer und ärgert andere Helden*Innen." << std::endl;
+        //Grafische Trennung der Inhalte
+        std::cout << "------------------------------" << std::endl;
+
+        std::cout << "Sorcerer " << this->getName() << " verlässt das Abenteuer und ärgert andere Held*Innen." << std::endl;
     }
 
     //----------------------------- Objektfunktionen -----------------------------
@@ -46,7 +49,7 @@ class Sorcerer : public NPC
     void setMagicPower(int newMagicPower);
 };
 
-//Operatorenüberladung des Opterators "<<"
+//Operatorenüberladung des Operators "<<"
 std::ostream& operator<<(std::ostream& out, const Sorcerer& s);
 
 #endif //SORCERER_H

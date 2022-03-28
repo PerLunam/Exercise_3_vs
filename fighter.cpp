@@ -1,6 +1,6 @@
-#include <iostream>
-
 #include "fighter.h"
+
+#include <iostream>
 
 //----------------------------- Objektfunktionen -----------------------------
 void Fighter::attack(Character *enemy)
@@ -38,6 +38,6 @@ void Fighter::setStrength(int newStrength)
 std::ostream& operator<<(std::ostream& out, const Fighter& f)
 {
     std::cout << "Fighter " << f.getName() << " mit " << f.getHealth() << " Lebenspunkten, " << f.getArmor() << " Rüstungspunkte, " << f.getMR() << " Magieresistenz und " << f.getStrength() <<
-    " Muskelkraft sowie " << f.getGold() << " Gold." << std::endl;
+              " Muskelkraft sowie " << f.getGold() << " Gold." << std::endl;
     return out;
 }

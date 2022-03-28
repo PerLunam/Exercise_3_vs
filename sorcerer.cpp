@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "sorcerer.h"
 
 //----------------------------- Objektfunktionen -----------------------------
@@ -38,6 +36,6 @@ void Sorcerer::setMagicPower(int newMagicPower)
 std::ostream& operator<<(std::ostream& out, const Sorcerer& s)
 {
     std::cout << "Sorcerer " << s.getName() << " mit " << s.getHealth() << " Lebenspunkten, " << s.getArmor() << " Rüstungspunkte, " << s.getMR() << " Magieresistenz und " << s.getMagicPower() <<
-    " Zauberkraft sowie " << s.getGold() << " Gold." << std::endl;
+              " Zauberkraft sowie " << s.getGold() << " Gold." << std::endl;
     return out;
 }

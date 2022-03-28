@@ -16,9 +16,9 @@ class Item
     public:
     //Konstruktoren der Class "Character"
     //Default
-    Item() : item_name("Default-Item"), isValid(false)
+    Item() : item_name("Default-Item"), item_value(0), isValid(false)
     {
-        std::cout << "Calling Item::Default-Constructor" << std::endl;
+        //std::cout << "Calling Item::Default-Constructor" << std::endl;
         //std::cout << "Konstruktor: " << item_name << std::endl;
     }
 
@@ -26,13 +26,13 @@ class Item
     Item(const std::string &name, int value)
         : item_name(name), item_value(value), isValid(true)
         {
-            std::cout << "Konstruktor: " << item_name << std::endl;
+            std::cout << "Item::Constructor : " << item_name << std::endl;
         }
 
     //Destruktor
     ~Item()
     {
-        std::cout << "Destruktor: " << item_name << std::endl;
+        //std::cout << "Destruktor: " << item_name << std::endl;
     }
 
     //----------------------------- Getter & Setter -----------------------------
@@ -46,7 +46,7 @@ class Item
     void setIsValid(bool newIsValid);
 };
 
-//Operatorenüberladung des Opterators "<<"
-std::ostream& operator<<(std::ostream& out, const Item& i);
+//Operatorenüberladung des Operators "<<"
+//std::ostream& operator<<(std::ostream& out, const Item& i);
 
 #endif //ITEM_H

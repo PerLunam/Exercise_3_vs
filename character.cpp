@@ -1,29 +1,29 @@
-#include <iostream>
-
 #include "character.h"
+
+#include <iostream>
 
 //----------------------------- Objektfunktionen -----------------------------
 bool Character::fight(Character *enemy)
 {
     std::cout << enemy->getName() << " fordert " << this->getName() << " zu einem Kampf um Ruhm und Ehre heraus." << std::endl;
-    
+
     //Lösung mithilfe einer Do-While-Loop
-
-
-    
-    if(this->getHealth() > 0 && enemy->getHealth() > 0)
+    do
     {
         this->attack(enemy);
+        enemy->attack(this);
+    } while(this->getHealth() > 0 && enemy->getHealth() > 0);
 
-        if(enemy->getHealth() > 0)
-        {
-            enemy->attack(this);
-        }
-    }
+    std::cout << enemy->getName() << " fiel in Ohnmacht! " << this->getName() << " hat noch " << this->getHealth() << " Lebenspunkte." << std::endl;
+
+    //Grafische Trennung der Inhalte
+    std::cout << "------------------------------" << std::endl;
+
+    //Falls Hero gewinnt, wird hier "true" zurückgegeben
     return this->getHealth() > 0;
 }
 
-int Character::addInventarItem(Item &item)
+int Character::addInventarItem(const Item &item)
 {
     for(int i = 0; i < MAX_INVENTORY_SIZE; i++)
     {
@@ -31,8 +31,7 @@ int Character::addInventarItem(Item &item)
         {
             this->inventory[i].setName(item.getName());
             this->inventory[i].setValue(item.getValue());
-            //this->inventory[i].setIsValid(true);
-            this->inventory[i].setIsValid(item.isIsValid());
+            this->inventory[i].setIsValid(true);
 
             //Bei erfolgreicher Platzierung soll der Index des Items ausgegeben werden
             return i;
@@ -47,7 +46,7 @@ Item Character::removeInventarItem(int slot)
     if(this->inventory[slot].isIsValid())
     {
         this->inventory[slot].setIsValid(false);
-        std::cout << "Das Item " << this->inventory[slot].getName() << " wurde aus dem Invenatr von " << this->getName() << " entfernt." << std::endl;
+        std::cout << "Item  \"" << this->inventory[slot].getName() << "\" wurde aus dem Inventar von " << this->getName() << " entfernt." << std::endl;
         return this->inventory[slot];
     } else
     {
@@ -65,7 +64,7 @@ Item Character::retrieveRandomLoot(Character *enemy)
     if(enemy->inventory[rndNumber].isIsValid())
     {
         //falls der Index korrekt initialisiert ist (isValid = "true"), soll das Item aus dem Inventar des Gegners entfernt ("removeInventarItem")
-        //und in das Inventar des Helden/ der Helding beigefügt werden ("addInventarItem")
+        //und in das Inventar des Helden/ der Heldin beigefügt werden ("addInventarItem")
 
         //Erster Versuch der Umsetzung, aber mit Fehler
         //this->addInventarItem(&enemy->removeInventarItem(rndNumber));
@@ -80,11 +79,21 @@ Item Character::retrieveRandomLoot(Character *enemy)
         //Das entsprechend Item wird dem Inventar des Helden/ der Heldin beigefügt
         this->addInventarItem(lootItem);
 
+        std::cout << "Des einen Glück, des anderen Leid. " << this->getName() << " hat sich \"" << enemy->getInventory(rndNumber)->getName() << "\" redlich verdient." << std::endl;
+
+        //Grafische Trennung der Inhalte
+        std::cout << "------------------------------" << std::endl;
+
         return lootItem;
     } else
     {
         //Falls alle Plätze belegt oder der Slot fehlerhaft initialisiert sein,
         //wird der Default-Konstruktor verwendet und das Item "Default-Item" mit isValid "false" ausgegeben
+        std::cout << "Kein Platz vorhanden. " << enemy->getInventory(rndNumber)->getName() << " bleibt " << this->getName() << " leider verwehrt." << std::endl;
+
+        //Grafische Trennung der Inhalte
+        std::cout << "------------------------------" << std::endl;
+
         return Item();
     }
 }
@@ -146,7 +155,7 @@ Item *Character::getInventory(int index)
     return &item;
 }
 
-//Operatorenüberladung des Opterators "<<"
+//Operatorenüberladung des Operators "<<"
 std::ostream& operator<<(std::ostream& out, const Character& c)
 {
     std::cout << c.getName() << " mit " << c.getHealth() << " Lebenspunkten, " << c.getArmor() << " Rüstungspunkte, " << c.getMR() << " Magieresistenz und " << c.getGold() << " Gold." << std::endl;

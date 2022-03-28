@@ -54,7 +54,7 @@ class Character
 
     bool fight(Character *enemy);
 
-    int addInventarItem(Item &item);
+    int addInventarItem(const Item &item);
     Item removeInventarItem(int slot);
 
     virtual enumType &getType() = 0;
